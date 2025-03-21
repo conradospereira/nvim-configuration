@@ -1,143 +1,57 @@
-# Configuração do Neovim com Lazy.nvim
+# Configuração Neovim
 
-Este README explica como configurar o Neovim usando o gerenciador de plugins Lazy.nvim, com foco na organização dos arquivos de configuração e no carregamento de plugins.
+Configuração modular e eficiente para Neovim com gerenciador de plugins lazy.nvim.
 
-## Estrutura de Diretórios
+## Estrutura
 
-A estrutura de diretórios utilizada é a seguinte:
-~/.config/nvim/
-├── init.lua
+```
+.
+├── init.lua                 # Arquivo principal
 └── lua/
-├── config/
-│   └── lazy.lua
-└── plugins/
-└── neo-tree.lua
-└── ... (outros plugins)
+    ├── config/              # Configurações básicas
+    │   ├── lazy.lua         # Gerenciador de plugins
+    │   ├── keymaps.lua      # Atalhos de teclado
+    │   ├── options.lua      # Opções globais
+    │   └── bufferline.lua   # Configuração da barra de buffers
+    └── plugins/             # Definições de plugins
+        ├── bufferline.lua   # Plugin para buffers/abas
+        └── nvim-tree.lua    # Explorador de arquivos
+```
 
-* `init.lua`: Arquivo de configuração principal do Neovim.
-* `lua/config/lazy.lua`: Arquivo de configuração do Lazy.nvim.
-* `lua/plugins/`: Diretório onde os arquivos de configuração dos plugins são armazenados.
+## Funcionalidades
 
-## Configuração do Lazy.nvim
+### Plugins Principais
+- **lazy.nvim**: Gerenciador de plugins com carregamento sob demanda
+- **nvim-tree**: Explorador de arquivos moderno
+- **bufferline**: Navegação intuitiva entre buffers
 
-O arquivo `init.lua` carrega a configuração do Lazy.nvim:
+### Opções Importantes
+- Interface limpa com números de linha relativos
+- Indentação de 2 espaços
+- Busca inteligente (diferencia maiúsculas quando você as digita)
+- Sem arquivos de backup/swap
 
-```lua
--- init.lua
-require('config.lazy')
+## Atalhos de Teclado
 
-O arquivo lua/config/lazy.lua configura o Lazy.nvim e define os plugins a serem carregados:
--- lua/config/lazy.lua
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+| Atalho | Função |
+|--------|--------|
+| `Espaço + e` | Abre/fecha o explorador de arquivos |
+| `Tab` | Próximo buffer |
+| `Espaço + q` | Buffer anterior |
+| `Espaço + bc` | Fecha o buffer atual |
+| `Espaço + bo` | Fecha outros buffers |
+| `Espaço + 1-4` | Acessa os buffers 1-4 |
+| `Ctrl + h/l` | Navega entre janelas (esquerda/direita) |
 
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "[https://github.com/folke/lazy.nvim.git](https://github.com/folke/lazy.nvim.git)",
-    "--branch=stable",
-    lazypath,
-  })
-end
+## Como Começar
 
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+1. Abra qualquer arquivo com `nvim arquivo.txt`
+2. Pressione `Espaço + e` para abrir o explorador
+3. Use `Tab` para navegar entre buffers abertos
 
-require("lazy").setup({
-    "plugins", -- Carrega todos os plugins do diretório "plugins"
-    -- Outros plugins podem ser adicionados aqui também
-})
+## Por Que Esta Configuração?
 
-Você tem razão, me desculpe pela falta de clareza. Como sou um modelo de linguagem e não tenho acesso direto ao seu sistema de arquivos, não posso criar e disponibilizar um arquivo para download diretamente. No entanto, posso te ajudar a criar o arquivo de forma fácil e rápida.
-
-Alternativa: Download via serviço externo
-
-Vou gerar um link temporário onde você pode baixar o arquivo.
-
-Vou utilizar o serviço pastebin para disponibilizar o arquivo para download.
-Segue o conteúdo do README.md que você precisa copiar:
-
-Markdown
-
-# Configuração do Neovim com Lazy.nvim
-
-Este README explica como configurar o Neovim usando o gerenciador de plugins Lazy.nvim, com foco na organização dos arquivos de configuração e no carregamento de plugins.
-
-## Estrutura de Diretórios
-
-A estrutura de diretórios utilizada é a seguinte:
-
-~/.config/nvim/
-├── init.lua
-└── lua/
-├── config/
-│   └── lazy.lua
-└── plugins/
-└── neo-tree.lua
-└── ... (outros plugins)
-
-
-* `init.lua`: Arquivo de configuração principal do Neovim.
-* `lua/config/lazy.lua`: Arquivo de configuração do Lazy.nvim.
-* `lua/plugins/`: Diretório onde os arquivos de configuração dos plugins são armazenados.
-
-## Configuração do Lazy.nvim
-
-O arquivo `init.lua` carrega a configuração do Lazy.nvim:
-
-```lua
--- init.lua
-require('config.lazy')
-O arquivo lua/config/lazy.lua configura o Lazy.nvim e define os plugins a serem carregados:
-
-Lua
-
--- lua/config/lazy.lua
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "[https://github.com/folke/lazy.nvim.git](https://github.com/folke/lazy.nvim.git)",
-    "--branch=stable",
-    lazypath,
-  })
-end
-
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-
-require("lazy").setup({
-    "plugins", -- Carrega todos os plugins do diretório "plugins"
-    -- Outros plugins podem ser adicionados aqui também
-})
-A linha "plugins" dentro da função require("lazy").setup({}) instrui o Lazy.nvim a carregar todos os arquivos Lua presentes no diretório lua/plugins/.
-
-Configuração de Plugins
-Cada plugin possui seu próprio arquivo de configuração dentro do diretório lua/plugins/. Por exemplo, a configuração do Neo-tree está no arquivo lua/plugins/neo-tree.lua:
-
--- lua/plugins/neo-tree.lua
-return {
-  "nvim-neo-tree/neo-tree.nvim",
-  branch = "v3.x",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
-    "MunifTanjim/nui.nvim",
-  },
-  lazy = false,
-  opts = {
-    -- Opções de configuração do Neo-tree
-  },
-}
-
-Passos para Configurar um Novo Plugin
-Crie um arquivo .lua dentro do diretório lua/plugins/ com o nome do plugin (ex: lua/plugins/meu-plugin.lua).
-Adicione a configuração do plugin no arquivo criado, seguindo a estrutura de tabela do Lazy.nvim.
-Recarregue a configuração do Neovim (:Lazy sync ou reinicie o Neovim).
-Vantagens
-Organização: Cada plugin possui seu próprio arquivo de configuração.
-Flexibilidade: Fácil de adicionar, remover ou modificar plugins.
-Lazy loading: Plugins são carregados apenas quando necessário, otimizando o tempo de inicialização do Neovim.
-Com esta estrutura, você terá um Neovim organizado e fácil de manter, utilizando o poder do Lazy.nvim para gerenciar seus plugins de forma eficiente.
+- **Modular**: Cada arquivo tem uma responsabilidade específica
+- **Rápida**: Carregamento eficiente de plugins
+- **Simples**: Foco nas funcionalidades essenciais
+- **Organizada**: Estrutura lógica e fácil de manter
