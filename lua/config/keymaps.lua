@@ -1,5 +1,12 @@
 -- lua/config/keymaps.lua
-vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Alternar NvimTree' })
-vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Ir para janela à esquerda' })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Ir para janela à direita' })
--- Adicione outros keymaps aqui
+vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Open and close NvimTree' })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to the left buffer' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to the right buffer' })
+vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>q', '<Cmd>BufferLineCyclePrev<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<leader>bc', '<Cmd>Bdelete! <CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>bo', '<Cmd>BufOnly<CR>', { desc = 'Close other buffers' })
+vim.keymap.set('n', '<leader>1', '<Cmd>BufferLineGoToBuffer 1<CR>', { desc = 'Go to buffer 1' })
+vim.keymap.set('n', '<leader>2', '<Cmd>BufferLineGoToBuffer 2<CR>', { desc = 'Go to buffer 2' })
+vim.keymap.set('n', '<leader>3', '<Cmd>BufferLineGoToBuffer 3<CR>', { desc = 'Go to buffer 3' })
+vim.keymap.set('n', '<leader>4', '<Cmd>BufferLineGoToBuffer 4<CR>', { desc = 'Go to buffer 4' })
